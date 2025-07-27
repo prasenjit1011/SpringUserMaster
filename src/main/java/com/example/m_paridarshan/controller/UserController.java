@@ -1,48 +1,48 @@
 package com.example.m_paridarshan.controller;
 
 import com.example.m_paridarshan.model.User;
+import com.example.m_paridarshan.repository.UserRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private Map<String, User> users = new HashMap<>();
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public User createUser(@Valid @RequestBody User user) {
-        String id = UUID.randomUUID().toString();
-        user.setId(id);
-        users.put(id, user);
-        return user;
+        return userRepository.save(user);
     }
 
     @GetMapping
-    public Collection<User> getAllUsers() {
-        return users.values();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable String id) {
-        return users.get(id);
+    public Optional<User> getUserById(@PathVariable String id) {
+        return userRepository.findById(id);
     }
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable String id, @Valid @RequestBody User updatedUser) {
-        User existing = users.get(id);
-        if (existing != null) {
-            existing.setName(updatedUser.getName());
-            existing.setEmail(updatedUser.getEmail());
-        }
-        return existing;
+        return userRepository.findById(id).map(existingUser -> {
+            existingUser.setName(updatedUser.getName());
+            existingUser.setEmail(updatedUser.getEmail());
+            return userRepository.save(existingUser);
+        }).orElseThrow(() -> new RuntimeException("User not found with id " + id));
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable String id) {
-        users.remove(id);
+        userRepository.deleteById(id);
         return "User deleted successfully";
     }
 }
