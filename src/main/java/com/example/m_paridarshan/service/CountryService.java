@@ -6,6 +6,7 @@ import com.example.m_paridarshan.dto.StateDTO;
 import com.example.m_paridarshan.model.Country;
 import com.example.m_paridarshan.model.State;
 import com.example.m_paridarshan.repository.CountryRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,9 @@ public class CountryService {
         this.countryRepo = countryRepo;
     }
 
+
+
+
     public List<CountryDTO> getAllCountries() {
         return countryRepo.findAll().stream().map(country -> {
             CountryDTO dto = new CountryDTO();
@@ -26,13 +30,16 @@ public class CountryService {
             dto.setName(country.getName());
             dto.setStates(country.getStates().stream().map(state -> {
                 StateDTO sd = new StateDTO();
-                sd.setId(state.getId());
-                sd.setName(state.getName());
+                sd.setId(state.getId()*200);
+                sd.setName(state.getName());                
                 return sd;
             }).collect(Collectors.toList()));
             return dto;
         }).collect(Collectors.toList());
     }
+
+
+
 
 
     public CountryDTO createCountry(CountryDTO countryDTO) {
