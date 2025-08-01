@@ -22,10 +22,17 @@
 package com.example.m_paridarshan.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+//import lombok.Data;
+import lombok.*;
+import java.util.List;
+
+
+
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class State {
 
     @Id
@@ -37,4 +44,9 @@ public class State {
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
+
+
+    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
+    private List<City> cities;
 }
+
