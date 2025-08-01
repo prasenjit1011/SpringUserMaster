@@ -25,8 +25,14 @@ package com.example.m_paridarshan.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.util.List;
 
+
+@AllArgsConstructor
+@Data
 public class CountryDTO {
 
     private Long id;

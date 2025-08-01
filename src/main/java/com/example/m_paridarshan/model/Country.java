@@ -2,8 +2,12 @@ package com.example.m_paridarshan.model;
 
 import jakarta.persistence.*;
 import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

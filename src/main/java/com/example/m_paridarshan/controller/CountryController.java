@@ -36,7 +36,7 @@ public class CountryController {
 
 
     @GetMapping
-    public List<Country> getAllCountries() {
+    public List<CountryDTO> getAllCountries() {
         return countryService.getAllCountries();
     }
 
