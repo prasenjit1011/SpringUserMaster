@@ -8,6 +8,6 @@ import java.util.Map;
 public class HelloController {
     @GetMapping("/")
     public Map<String, Object> hello() {
-        return Map.of("msg", "Hello World", "status", 200);
+        return Map.of("msg", "Hello World : Pom.xml, DB Connected Successfully.", "status", 200);
     }
 }
