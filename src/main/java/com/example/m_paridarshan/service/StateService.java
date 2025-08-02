@@ -1,5 +1,7 @@
 package com.example.m_paridarshan.service;
 
+import com.example.m_paridarshan.dto.CityDTO;
+import com.example.m_paridarshan.dto.CountryDTO;
 import com.example.m_paridarshan.dto.StateDTO;
 import com.example.m_paridarshan.model.Country;
 import com.example.m_paridarshan.model.State;
@@ -23,6 +25,34 @@ public class StateService {
 
     // ✅ Get all states
     public List<StateDTO> getAllStates() {
+        return stateRepository.findAll()
+                .stream()
+                .map(state-> {
+                    StateDTO dto = new StateDTO();
+                    dto.setId(state.getId()*10000);
+                    dto.setName(state.getName());
+                    if (state.getCountry() != null) {
+                        dto.setCountryId(state.getCountry().getId());
+                    }
+
+
+                    dto.setCities(state.getCities().stream().map(city -> {
+                        CityDTO cityDto = new CityDTO(); // ✅ Use correct DTO
+                        cityDto.setId(city.getId() * 10000);
+                        cityDto.setName(city.getName());
+                        return cityDto;
+                    }).collect(Collectors.toList()));
+                    
+
+                    return dto;
+                })                
+                .collect(Collectors.toList());
+    }
+
+
+
+
+    public List<StateDTO> getAllStatesOld() {
         return stateRepository.findAll()
                 .stream()
                 .map(this::convertToDTO)

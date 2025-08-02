@@ -46,7 +46,7 @@ public class State {
     private Country country;
 
 
-    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<City> cities;
 }
 

@@ -1,6 +1,9 @@
 
 
 ```bash
+ 1943  docker system prune
+ 1944  docker system prune --volumes
+
 docker build -t springmaster .
 docker run -p 8080:8080 springmaster
 

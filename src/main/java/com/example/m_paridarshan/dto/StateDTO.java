@@ -1,6 +1,8 @@
 // StateDTO.java
 package com.example.m_paridarshan.dto;
 
+import java.util.List;
+
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,4 +16,6 @@ public class StateDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long countryId; // <-- Important for assigning to a country
     
+    
+    private List<CityDTO> cities;
 }

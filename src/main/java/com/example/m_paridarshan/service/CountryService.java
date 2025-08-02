@@ -1,6 +1,7 @@
 // CountryService.java
 package com.example.m_paridarshan.service;
 
+import com.example.m_paridarshan.dto.CityDTO;
 import com.example.m_paridarshan.dto.CountryDTO;
 import com.example.m_paridarshan.dto.StateDTO;
 import com.example.m_paridarshan.model.Country;
@@ -30,8 +31,29 @@ public class CountryService {
             dto.setName(country.getName());
             dto.setStates(country.getStates().stream().map(state -> {
                 StateDTO sd = new StateDTO();
-                sd.setId(state.getId()*200);
-                sd.setName(state.getName());                
+                sd.setId(state.getId()*10000);
+                sd.setName(state.getName());
+
+
+
+                // sd.setCities(
+                //     state.getCities().stream().map(city -> {
+                //         CityDTO cityDto = new CityDTO();
+                //         cityDto.setId(city.getId() * 10000);
+                //         cityDto.setName(city.getName());
+                //         return cityDto;
+                //     }).collect(Collectors.toList())
+                // );
+
+                sd.setCities(
+                    state.getCities().stream().map(city -> {
+                        CityDTO cityDto = new CityDTO();
+                        cityDto.setId(city.getId() * 10000);
+                        cityDto.setName(city.getName());
+                        return cityDto;
+                    }).collect(Collectors.toList())
+                );
+
                 return sd;
             }).collect(Collectors.toList()));
             return dto;
