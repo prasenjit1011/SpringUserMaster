@@ -67,6 +67,7 @@ public class CountryService {
     public CountryDTO createCountry(CountryDTO countryDTO) {
         Country country = new Country();
         country.setName(countryDTO.getName());
+        country.setImageName(countryDTO.getImageName());
     
         // Convert StateDTOs to State entities
         if (countryDTO.getStates() != null) {
@@ -85,6 +86,8 @@ public class CountryService {
         CountryDTO savedDTO = new CountryDTO();
         savedDTO.setId(saved.getId());
         savedDTO.setName(saved.getName());
+        savedDTO.setImageName(saved.getImageName());
+
         if (saved.getStates() != null) {
             List<StateDTO> savedStates = saved.getStates().stream().map(state -> {
                 StateDTO sd = new StateDTO();

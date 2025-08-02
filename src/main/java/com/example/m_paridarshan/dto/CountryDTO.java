@@ -13,5 +13,7 @@ public class CountryDTO {
     @Size(min = 3, max = 50)
     private String name;
 
+    private String imageName;
+
     private List<StateDTO> states;
 }
