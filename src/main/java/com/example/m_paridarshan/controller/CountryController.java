@@ -22,10 +22,10 @@ public class CountryController {
         return countryService.getAllCountries();
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<CountryDTO> getCountryById(@PathVariable Long id) {
-    //     return ResponseEntity.ok(countryService.getCountryById(id));
-    // }
+    @GetMapping("/{id}")
+    public ResponseEntity<CountryDTO> getCountryById(@PathVariable Long id) {
+        return ResponseEntity.ok(countryService.getCountryById(id));
+    }
 
     @PostMapping
     public ResponseEntity<CountryDTO> createCountry(@RequestBody CountryDTO countryDTO) {

@@ -108,4 +108,31 @@ public class CountryService {
     
 
 
+    public CountryDTO getCountryById(Long id) {
+        Country country = countryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Country not found with ID: " + id));
+
+        CountryDTO dto = new CountryDTO();
+        dto.setId(country.getId());
+        dto.setName(country.getName());
+
+        dto.setStates(country.getStates().stream().map(state -> {
+            StateDTO stateDto = new StateDTO();
+            stateDto.setId(state.getId() * 10000);
+            stateDto.setName(state.getName());
+
+            stateDto.setCities(state.getCities().stream().map(city -> {
+                CityDTO cityDto = new CityDTO();
+                cityDto.setId(city.getId() * 10000);
+                cityDto.setName(city.getName());
+                return cityDto;
+            }).collect(Collectors.toList()));
+
+            return stateDto;
+        }).collect(Collectors.toList()));
+
+        return dto;
+    }
+
+
 }
