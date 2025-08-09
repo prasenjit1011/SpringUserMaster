@@ -1,9 +1,9 @@
 # src/main/resources/application.yml
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mydb
-    username: myuser
-    password: mypassword
+    url: jdbc:postgresql://postgres-db:5432/mydb
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
