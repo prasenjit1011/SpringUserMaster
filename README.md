@@ -6,6 +6,13 @@ docker run -p 8080:8080 springmaster
 
 docker rm springboot-app
 docker run -p 8080:8080 --name springboot-app --network host springmaster
+docker run  --name springbootv2 --network my-net -p 8080:8080 springmaster
+
+
+docker exec -it springboot-app hostname -I
+docker run -d   --name postgres-db --network my-net -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mydb -p 5432:5432  postgres:15
+
+
 ```
 
 ```bash

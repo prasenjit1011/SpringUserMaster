@@ -5,6 +5,12 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 50   # Optimal for most apps, adjust if needed
+      minimum-idle: 10        # Keep a small number of idle connections
+      idle-timeout: 30000     # 30s before releasing idle connections
+      connection-timeout: 20000 # 20s to get a connection before failing
+      max-lifetime: 1800000   # 30 min max connection age
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,3 +23,12 @@ spring:
       indent-output: true
     deserialization:
       fail-on-unknown-properties: true
+
+server:
+  tomcat:
+    threads:
+      max: 200         # Reduce to avoid overloading DB
+      min-spare: 20
+  connection-timeout: 20000 # 20s request timeout
+
+
