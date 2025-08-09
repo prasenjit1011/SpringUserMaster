@@ -42,6 +42,7 @@ public class ProductController {
         Integer connectionId = jdbcTemplate.queryForObject("SELECT pg_backend_pid()", Integer.class);
 
         Map<String, Object> response = new HashMap<>();
+        response.put("time", connectionId);
         response.put("dbConnectionId", connectionId);
         response.put("productlist", service.getAllProducts());
         return ResponseEntity.ok(response);
