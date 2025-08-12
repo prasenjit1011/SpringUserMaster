@@ -8,7 +8,7 @@ docker run -p 8080:8080 springmaster
 
 docker rm springboot-app
 docker run -p 8080:8080 --name springbootv3 --network host springmaster
-docker run  --name springbootv3 --network my-net -p 8080:8080 springmaster
+docker run  --name springbootv5 --network my-net -p 8080:8080 springmaster
 
 
 docker exec -it springboot-app hostname -I
