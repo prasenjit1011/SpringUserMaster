@@ -15,6 +15,9 @@ docker exec -it springboot-app hostname -I
 docker run -d   --name postgres-db --network my-net -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mydb -p 5432:5432  postgres:15
 
 
+docker compose -f docker-compose.dev.yml up
+
+
 ```
 
 ```bash

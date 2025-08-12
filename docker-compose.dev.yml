@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: springboot-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app/src       # Mount source code
+      - ./target:/app/target # Mount build output
+      - ~/.m2:/root/.m2      # Cache Maven dependencies
+    command: mvn spring-boot:run
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev

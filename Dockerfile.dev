@@ -1,0 +1,17 @@
+# Development Dockerfile
+FROM maven:3.9-eclipse-temurin-17
+
+WORKDIR /app
+
+# Copy only pom.xml to pre-download dependencies
+COPY pom.xml ./
+RUN mvn dependency:go-offline -B
+
+# Copy source (will be overridden by volume in docker-compose)
+COPY src ./src
+
+# Expose Spring Boot default port
+EXPOSE 8080
+
+# Run Spring Boot in dev mode
+CMD ["mvn", "spring-boot:run"]
