@@ -1,14 +1,11 @@
 package com.example.m_paridarshan.dto;
 
-public class CityDTO {
+public class TouristSpotDTO {
     private Long id;
     private String name;
-    private java.util.List<TouristSpotDTO> touristSpots;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-    public java.util.List<TouristSpotDTO> getTouristSpots() { return touristSpots; }
-    public void setTouristSpots(java.util.List<TouristSpotDTO> touristSpots) { this.touristSpots = touristSpots; }
 }

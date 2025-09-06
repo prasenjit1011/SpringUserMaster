@@ -5,6 +5,7 @@ import com.example.m_paridarshan.model.Country;
 import com.example.m_paridarshan.service.CountryService;
 import com.example.m_paridarshan.dto.StateDTO;
 import com.example.m_paridarshan.dto.CityDTO;
+import com.example.m_paridarshan.dto.TouristSpotDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,6 +79,15 @@ public class CountryController {
                         CityDTO cdto = new CityDTO();
                         cdto.setId(city.getId());
                         cdto.setName(city.getName());
+                        if (city.getTouristSpots() != null) {
+                            java.util.List<TouristSpotDTO> tsDTOs = city.getTouristSpots().stream().map(ts -> {
+                                TouristSpotDTO tsdto = new TouristSpotDTO();
+                                tsdto.setId(ts.getId());
+                                tsdto.setName(ts.getName());
+                                return tsdto;
+                            }).collect(Collectors.toList());
+                            cdto.setTouristSpots(tsDTOs);
+                        }
                         return cdto;
                     }).collect(Collectors.toList());
                     sdto.setCities(cityDTOs);
