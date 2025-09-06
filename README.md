@@ -53,7 +53,7 @@ SELECT * FROM products;
 
 docker build -t springmaster .
 docker run  --name springbootv25 --network my-net -p 8080:8080 springmaster
-
+docker run  --name springbootv25 --network my-net -p 8080:8080 -v C:/myprojects/github/SpringUserMaster/uploads:/app/uploads springmaster
 
 
 docker run -p 8080:8080 springmaster
@@ -63,6 +63,16 @@ docker run  --name springbootv25 --network my-net -p 8080:8080 springmaster
 docker compose -f docker-compose.dev.yml up
 docker exec -it springboot-app hostname -I
 ```
+
+```bash
+# 06-September-2025
+
+RUN mkdir -p /app/uploads/distributors && chmod -R 777 /app/uploads
+
+
+```
+
+
 
 ## docker-compose build
 ## docker-compose up
