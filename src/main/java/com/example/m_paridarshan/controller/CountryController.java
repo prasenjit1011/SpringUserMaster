@@ -4,6 +4,7 @@ import com.example.m_paridarshan.dto.CountryDTO;
 import com.example.m_paridarshan.model.Country;
 import com.example.m_paridarshan.service.CountryService;
 import com.example.m_paridarshan.dto.StateDTO;
+import com.example.m_paridarshan.dto.CityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,15 @@ public class CountryController {
                 StateDTO sdto = new StateDTO();
                 sdto.setId(state.getId());
                 sdto.setName(state.getName());
+                if (state.getCities() != null) {
+                    java.util.List<CityDTO> cityDTOs = state.getCities().stream().map(city -> {
+                        CityDTO cdto = new CityDTO();
+                        cdto.setId(city.getId());
+                        cdto.setName(city.getName());
+                        return cdto;
+                    }).collect(Collectors.toList());
+                    sdto.setCities(cityDTOs);
+                }
                 return sdto;
             }).collect(Collectors.toList());
             dto.setStates(stateDTOs);

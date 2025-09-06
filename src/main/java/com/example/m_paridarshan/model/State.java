@@ -14,6 +14,9 @@ public class State {
 
     private String name;
 
+    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<City> cities = new java.util.ArrayList<>();
+
     // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -21,4 +24,6 @@ public class State {
     public void setCountry(Country country) { this.country = country; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+    public java.util.List<City> getCities() { return cities; }
+    public void setCities(java.util.List<City> cities) { this.cities = cities; }
 }
