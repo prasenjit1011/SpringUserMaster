@@ -3,6 +3,7 @@ package com.example.m_paridarshan.controller;
 import com.example.m_paridarshan.dto.CountryDTO;
 import com.example.m_paridarshan.model.Country;
 import com.example.m_paridarshan.service.CountryService;
+import com.example.m_paridarshan.dto.StateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CountryController {
 
     @GetMapping
     public List<CountryDTO> getAllCountries() {
-        return countryService.getAllCountries().stream().map(this::toDTO).collect(Collectors.toList());
+        return countryService.getAllCountries().stream().map(this::toDTOWithStates).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -59,6 +60,22 @@ public class CountryController {
         CountryDTO dto = new CountryDTO();
         dto.setId(country.getId());
         dto.setName(country.getName());
+        return dto;
+    }
+
+    private CountryDTO toDTOWithStates(Country country) {
+        CountryDTO dto = new CountryDTO();
+        dto.setId(country.getId());
+        dto.setName(country.getName());
+        if (country.getStates() != null) {
+            java.util.List<StateDTO> stateDTOs = country.getStates().stream().map(state -> {
+                StateDTO sdto = new StateDTO();
+                sdto.setId(state.getId());
+                sdto.setName(state.getName());
+                return sdto;
+            }).collect(Collectors.toList());
+            dto.setStates(stateDTOs);
+        }
         return dto;
     }
 }
